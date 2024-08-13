@@ -1,0 +1,6 @@
+# General information on how to access the site under test
+general:
+    host: quickstart-etg-demo.myshopify.com/
+    baseUrl: "https://${general.host}"
+    credentials:
+        password: Testing@123
