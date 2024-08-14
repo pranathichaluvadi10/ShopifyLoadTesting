@@ -18,7 +18,8 @@ public class CartBanner implements Component
     {
         //return Page.find().byId("titleCart");
         //return Page.find().byCss("h2.num-of-items");
-        return Page.find().byCss("h1.cart-title");
+        //return Page.find().byCss("h1.cart-title");
+        return Page.find().byCss(".title.title--primary");
     }
 
     @Override

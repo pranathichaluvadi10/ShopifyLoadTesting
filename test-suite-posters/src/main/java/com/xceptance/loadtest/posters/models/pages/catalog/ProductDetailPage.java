@@ -71,7 +71,7 @@ public class ProductDetailPage extends GeneralPages
         //String productId = Page.find().byId("btnAddToCart").asserted("Expected add to cart button").single().getAttribute("onclick");
         //productId = RegExUtils.getFirstMatch(productId, "addToCart\\((\\d+)\\,", 1);
     	//String productId = Page.find().byCss("a.add-to-cart[data-pid]").asserted("Expected add to cart button").single().getAttribute("data-pid");
-    	String productId = Page.find().byCss("#ProductSubmitButton-template--17648079732976__main").asserted("Expected add to cart button").single().getAttribute("data-pid");
+    	String productId = Page.find().byCss("input[class='product-variant-id']").asserted("Expected add to cart button").single().getAttribute("value");
         
         
         Assert.assertTrue("Expected valid productId", !StringUtils.isBlank(productId));
@@ -79,22 +79,55 @@ public class ProductDetailPage extends GeneralPages
         return productId;
     }
     
-//    public String getSelectedSize()
-//    {
-//        //String selectedSize = Page.find().byId("selectSize").asserted("Expected size attribute").single().getAttribute("value");
-//    	String selectedSize = Page.find().byCss("span.display-value").asserted("Expected size attribute").single().getAttribute("value");
-//        
-//        Assert.assertTrue("Expected valid size attribute that is selected", !StringUtils.isBlank(selectedSize));
-//        
-//        return selectedSize;
-//    }
-//    
-//    public String getSelectedFinish()
-//    {
-//    	String selectedFinish = Page.find().byCss("#addToCartForm input[name=finish]:checked").asserted("Expected selected finish attribute").single().getAttribute("value");
-//    	
-//    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(selectedFinish));
-//    	
-//    	return selectedFinish;
-//    }
+    public String getSelectedSize()
+    {
+        //String selectedSize = Page.find().byId("selectSize").asserted("Expected size attribute").single().getAttribute("value");
+    	String selectedSize = Page.find().byCss("section.shopify-section section").asserted("Expected size attribute").single().getAttribute("data-section");
+        
+        Assert.assertTrue("Expected valid size attribute that is selected", !StringUtils.isBlank(selectedSize));
+        
+        return selectedSize;
+    }
+    
+    public String getSelectedFinish()
+    {
+    	String selectedFinish = Page.find().byCss("a[class='product__title']").asserted("Expected selected finish attribute").single().getAttribute("href");
+    	
+    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(selectedFinish));
+    	
+    	return selectedFinish;
+    }
+    public String getProductIdforValue()
+    {
+    	String productIdforValue = Page.find().byCss("form[data-type='add-to-cart-form'] input[name='product-id']").asserted("Expected selected finish attribute").single().getAttribute("value");
+    	
+    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(productIdforValue));
+    	
+    	return productIdforValue;
+    }
+    public String getUtf8()
+    {
+    	String utf8 = Page.find().byCss("form[data-type='add-to-cart-form'] input[name='utf8']").asserted("Expected selected finish attribute").single().getAttribute("value");
+    	
+    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(utf8));
+    	
+    	return utf8;
+    	
+    }
+    public String getFormType()
+    {
+    	String formType = Page.find().byCss("form[data-type='add-to-cart-form'] input[name='form_type']").asserted("Expected selected finish attribute").single().getAttribute("value");
+    	
+    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(formType));
+    	
+    	return formType;
+    }
+    public String gettitle()
+    {
+    	String title = Page.find().byCss("div[class='product__title'] h1").asserted("Expected selected finish attribute").single().getAttribute("class");
+    	
+    	Assert.assertTrue("Expected valid finish attribute that is selected", !StringUtils.isBlank(title));
+    	
+    	return title;
+    }
 }

@@ -4,6 +4,7 @@ import com.xceptance.loadtest.api.flows.Flow;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.actions.account.CreateAccount;
 import com.xceptance.loadtest.posters.actions.account.GoToCreateAccount;
+import com.xceptance.loadtest.posters.actions.account.GoToCreateRegister;
 
 /**
  * Opens the account creation page and create a new account.
@@ -20,6 +21,7 @@ public class CreateAccountFlow extends Flow
     {
         // Open create account page
         new GoToCreateAccount().run();
+        new GoToCreateRegister().run();
 
         // Fill form and submit new account
         new CreateAccount(Context.get().data.getAccount().get()).run();

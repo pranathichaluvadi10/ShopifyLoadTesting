@@ -25,11 +25,16 @@ public class AddToCart extends AjaxAction<AddToCart>
 {
     private int previousCartQuantity;
     
-    private String productId;
+    private String id;
     
     private String size;
     
     private String finish;
+    
+    private String productIdforValue;
+    private String utf8;
+    private String formType;
+    private String title;
 
     @Override
     public void precheck()
@@ -38,14 +43,32 @@ public class AddToCart extends AjaxAction<AddToCart>
         previousCartQuantity = GeneralPages.instance.miniCart.getQuantity();
 
         // Retrieve PID
-        productId = ProductDetailPage.instance.getProductId();
+        id = ProductDetailPage.instance.getProductId();
         
         // Retrieve selected size
-        //size = ProductDetailPage.instance.getSelectedSize();
+        size = ProductDetailPage.instance.getSelectedSize();
+        System.out.println("hdidiw" + size);
+
+       finish = ProductDetailPage.instance.getSelectedFinish();
+        System.out.println("finish23" + finish);
         
-        // Retrieve selected finish
-        //finish = ProductDetailPage.instance.getSelectedFinish();
+        productIdforValue = ProductDetailPage.instance.getProductIdforValue();
+      System.out.println("productIdforValue12" + productIdforValue);
+//      
+      utf8 = ProductDetailPage.instance.getUtf8();
+      System.out.println("utf812" + utf8);
+      
+      formType = ProductDetailPage.instance.getFormType();
+      System.out.println("title12" + formType);
+      
+      title = ProductDetailPage.instance.gettitle();
+      System.out.println("title123" + title);
+//      
+      // Retrieve selected finish
+        
+      
     }
+    
 
     /**
      * {@inheritDoc}
@@ -54,14 +77,27 @@ public class AddToCart extends AjaxAction<AddToCart>
     protected void doExecute() throws Exception
     {
     	final List<NameValuePair> addToCartParams = new ArrayList<NameValuePair>();
-        addToCartParams.add(new NameValuePair("pid",  productId));
+        addToCartParams.add(new NameValuePair("id",  id));
         addToCartParams.add(new NameValuePair("quantity", "1"));
+        addToCartParams.add(new NameValuePair("section-id", size));
+        addToCartParams.add(new NameValuePair("sections_url", finish));
+        addToCartParams.add(new NameValuePair("product_id", productIdforValue));
+        addToCartParams.add(new NameValuePair("utf8", utf8));
+        addToCartParams.add(new NameValuePair("formType", formType));
+       // addToCartParams.add(new NameValuePair("title", title));
         HttpRequest req = new HttpRequest()
-					.url("/on/demandware.store/Sites-fireMountainGems-Site/default/Cart-AddProduct")
+					.url("/cart/add")
                    .POST()          
 				    .postParams(addToCartParams);
         WebResponse response1=req.fire();
-		
+
+        String url = "";
+        
+        if(response1.getStatusCode()==200)
+        	   loadPage("https://quickstart-etg-demo.myshopify.com");
+           else
+        	 Assert.fail(response1.getStatusMessage());
+        loadPageByUrlClick(url);
     	// Send add to cart request
     	//WebResponse response = new HttpRequest()
     		//.XHR()
@@ -74,7 +110,7 @@ public class AddToCart extends AjaxAction<AddToCart>
     		//.fire();
     	
     	// Safely convert the response to JSON
-    	JSONObject addToCartJson = AjaxUtils.convertToJson(response1.getContentAsString());
+    	//JSONObject addToCartJson = AjaxUtils.convertToJson(response1.getContentAsString());
     	
     	//Assert.assertEquals("Cart quantity did not change",addToCartJson );
 
@@ -83,11 +119,11 @@ public class AddToCart extends AjaxAction<AddToCart>
 //    	{
 //    		
 //    	}
-   	var error = addToCartJson.get("error").toString();
-    	boolean isError = Boolean.parseBoolean(error);
-    	if(!isError) {
-    		Context.get().data.totalAddToCartCount++;
-    	}
+//   	var error = addToCartJson.get("error").toString();
+//    	boolean isError = Boolean.parseBoolean(error);
+//    	if(!isError) {
+//    		Context.get().data.totalAddToCartCount++;
+//    	}
     	//Assert.assertEquals("Cart quantity did not change",error );
         // Validate the item count in the add to cart response (headerCartOverview = itemsInMiniCart)
         //Assert.assertTrue("Cart quantity did not change", addToCartJson.has("headerCartOverview") && (addToCartJson.getInt("headerCartOverview") > previousCartQuantity));

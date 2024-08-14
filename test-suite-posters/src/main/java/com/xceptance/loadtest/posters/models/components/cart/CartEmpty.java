@@ -17,7 +17,8 @@ public class CartEmpty implements Component
     public LookUpResult locate()
     {
     	//return Page.find().byId("errorCartMessage");
-    	return Page.find().byCss("div.empty-title");
+//    	return Page.find().byCss("div.empty-title");
+    	return Page.find().byCss(".cart__empty-text");
     }
 
     @Override

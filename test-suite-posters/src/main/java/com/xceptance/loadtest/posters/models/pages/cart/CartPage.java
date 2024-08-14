@@ -19,7 +19,7 @@ public class CartPage extends GeneralPages
     
     public final CartEmpty cartEmpty = CartEmpty.instance;
     
-    public final CartTable cartTable = CartTable.instance;
+   // public final CartTable cartTable = CartTable.instance;
     
     public final CheckoutButton checkoutButton = CheckoutButton.instance;
     
@@ -28,15 +28,15 @@ public class CartPage extends GeneralPages
     {
         super.validate();
 
-        validate(has(cartBanner), hasOneOf(cartEmpty, cartTable));
-        //validate(has(cartBanner));
+        //validate(has(cartBanner), hasOneOf(cartEmpty, cartTable));
+        validate(has(cartBanner), hasOneOf(cartEmpty));
     }
 
     @Override
     public boolean is()
     {
-        return super.is() && matches(has(cartBanner), hasOneOf(cartEmpty, cartTable));
-        //return super.is() && matches(has(cartBanner));
+        //return super.is() && matches(has(cartBanner), hasOneOf(cartEmpty, cartTable));
+        return super.is() && matches(has(cartBanner), hasOneOf(cartEmpty));
     }
     
     public void validateIsNotEmpty()

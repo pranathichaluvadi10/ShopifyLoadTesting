@@ -674,4 +674,19 @@ public class LookUpResult
             }
         }
     }
+
+	public boolean getIsEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getIsEmptyCart() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

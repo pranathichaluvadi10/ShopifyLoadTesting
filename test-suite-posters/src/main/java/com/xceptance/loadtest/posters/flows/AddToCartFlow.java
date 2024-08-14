@@ -72,13 +72,15 @@ public class AddToCartFlow extends Flow
     {
         if (Context.configuration().searchOnAddToCartProbability.random())
         {
+        	  new NavigateCategoriesFlow().run();
         	// Search
-            new SearchFlow().run();
+           // new SearchFlow().run();
         }
         else
         {
             // Navigate the categories
-            new NavigateCategoriesFlow().run();
+            //new NavigateCategoriesFlow().run();
+            new SearchFlow().run();
         }
         
         // Handle resulting page, most likely product listing page
